@@ -26,7 +26,7 @@ import { BookingModalComponent } from '../booking-modal/booking-modal.component'
         </div>
         
         <div class="col-lg-3 col-md-6">
-          <label class="small text-info mb-2 d-block fw-bold">PRICE CAP: \${{ maxPriceFilter() }}</label>
+          <label class="small text-info mb-2 d-block fw-bold letter-spacing-1">PRICE CAP: \${{ maxPriceFilter() }}</label>
           <input type="range" class="form-range" min="100" max="500" step="10" 
                  [value]="maxPriceFilter()" (input)="updatePrice($event)">
         </div>
