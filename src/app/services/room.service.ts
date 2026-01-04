@@ -1,4 +1,3 @@
-// src/app/services/room.service.ts
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, of, delay, tap } from 'rxjs';
 import { Room, Booking } from '../models/room.model';
@@ -14,7 +13,10 @@ export class RoomService {
     { id: 203, name: '203', type: 'Suite', price: 400, isAvailable: true },
     { id: 301, name: '301', type: 'Double', price: 170, isAvailable: true },
     { id: 302, name: '302', type: 'Suite', price: 450, isAvailable: true },
-    { id: 303, name: '303', type: 'Single', price: 120, isAvailable: true }
+    { id: 303, name: '303', type: 'Single', price: 120, isAvailable: true },
+    { id: 401, name: '401', type: 'Twin', price: 240, isAvailable: true },
+    { id: 402, name: '402', type: 'Twin', price: 200, isAvailable: false },
+    { id: 403, name: '403', type: 'Twin', price: 230, isAvailable: true },
   ];
 
   private roomsSubject = new BehaviorSubject<Room[]>(this.rooms);

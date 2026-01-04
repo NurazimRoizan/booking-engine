@@ -1,4 +1,3 @@
-// src/app/components/booking-modal/booking-modal.component.ts
 import { Component, Input, Output, EventEmitter, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators, AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -22,67 +21,8 @@ export const dateRangeValidator: ValidatorFn = (control: AbstractControl): Valid
   selector: 'app-booking-modal',
   standalone: true,
   imports: [ReactiveFormsModule, CommonModule],
-  template: `
-    <div class="modal d-block" style="background: rgba(0,0,0,0.85); backdrop-filter: blur(8px); z-index: 1050;">
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content bg-black border border-info rounded-0 shadow-lg">
-          
-          <div class="modal-header border-bottom border-info border-opacity-25">
-            <h5 class="modal-title text-info text-glow small fw-bold">ROOM RESERVATION // {{ room.name }}</h5>
-            <button type="button" class="btn-close btn-close-white" (click)="onClose.emit()"></button>
-          </div>
-
-          <form [formGroup]="bookingForm" (ngSubmit)="onSubmit()">
-            <div class="modal-body p-4">
-              
-              <div class="mb-4">
-                <label class="text-info small mb-1 fw-bold">FULL NAME</label>
-                <input type="text" 
-                       class="form-control bg-transparent text-white border-secondary rounded-0 shadow-none" 
-                       [class.border-danger]="isFieldInvalid('guestName')"
-                       placeholder="ENTER NAME"
-                       formControlName="guestName">
-                <div *ngIf="isFieldInvalid('guestName')" class="text-danger small mt-1">Name is required</div>
-              </div>
-
-              <div class="row">
-                <div class="col-6">
-                  <label class="text-info small mb-1 fw-bold">ARRIVAL DATE</label>
-                  <input type="date" 
-                         class="form-control bg-transparent text-white border-secondary rounded-0 shadow-none" 
-                         formControlName="checkIn"
-                         (click)="openPicker($event)">
-                </div>
-                <div class="col-6">
-                  <label class="text-info small mb-1 fw-bold">DEPARTURE DATE</label>
-                  <input type="date" 
-                         class="form-control bg-transparent text-white border-secondary rounded-0 shadow-none" 
-                         formControlName="checkOut"
-                         (click)="openPicker($event)">
-                </div>
-              </div>
-
-              <div *ngIf="bookingForm.errors?.['dateRangeInvalid']" class="alert alert-danger bg-transparent border-danger text-danger rounded-0 mt-3 small">
-                CRITICAL_ERROR: Departure date must be after arrival date.
-              </div>
-            </div>
-
-            <div class="modal-footer border-top border-info border-opacity-25 p-3">
-              <button type="button" class="btn btn-outline-secondary rounded-0 flex-grow-1" (click)="onClose.emit()">
-                CANCEL
-              </button>
-              <button type="submit" 
-                      class="btn btn-info rounded-0 fw-bold flex-grow-1" 
-                      [disabled]="bookingForm.invalid">
-                CONFIRM_RESERVATION
-              </button>
-            </div>
-          </form>
-
-        </div>
-      </div>
-    </div>
-  `
+  templateUrl: './booking-modal.html',
+  styleUrl: './booking-modal.css'
 })
 export class BookingModalComponent {
   @Input({ required: true }) room!: Room;

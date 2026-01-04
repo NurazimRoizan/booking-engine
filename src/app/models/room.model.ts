@@ -1,8 +1,7 @@
-// src/app/models/room.model.ts
 export interface Room {
   id: number;
   name: string;
-  type: 'Single' | 'Double' | 'Suite';
+  type: 'Single' | 'Double' | 'Suite' | 'Twin';
   price: number;
   isAvailable: boolean;
 }
