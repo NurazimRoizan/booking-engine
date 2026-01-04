@@ -1,0 +1,24 @@
+.cyber-toast {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: #000;
+      border: 1px solid #00f3ff;
+      padding: 1rem 1.5rem;
+      z-index: 2000;
+      min-width: 300px;
+      box-shadow: 0 0 20px rgba(0, 243, 255, 0.2);
+      overflow: hidden;
+      animation: slideIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    .status-indicator {
+      width: 10px; height: 10px;
+      background: #00f3ff;
+      box-shadow: 0 0 10px #00f3ff;
+    }
+    .error { border-color: #ff003c; }
+    .error .status-indicator { background: #ff003c; box-shadow: 0 0 10px #ff003c; }
+    @keyframes slideIn {
+      from { transform: translateX(100%); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }

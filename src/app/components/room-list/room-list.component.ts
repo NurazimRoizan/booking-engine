@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { RoomService } from '../../services/room.service';
 import { Room } from '../../models/room.model';
 import { BookingModalComponent } from '../booking-modal/booking-modal.component';
+import { NotificationComponent } from '../notification/notification.component';
 
 @Component({
   selector: 'app-room-list',
   standalone: true,
-  imports: [CommonModule, BookingModalComponent],
+  imports: [CommonModule, BookingModalComponent, NotificationComponent],
   templateUrl: './room-list.html',
   styleUrl: './room-list.css'
 })

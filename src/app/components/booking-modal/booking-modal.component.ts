@@ -3,6 +3,7 @@ import { FormBuilder, ReactiveFormsModule, Validators, AbstractControl, Validati
 import { CommonModule } from '@angular/common';
 import { RoomService } from '../../services/room.service';
 import { Room } from '../../models/room.model';
+import { NotificationService } from '../../services/notification.service';
 
 /**
  * Custom Validator: Ensures Check-out is after Check-in
@@ -31,6 +32,7 @@ export class BookingModalComponent {
 
   private fb = inject(FormBuilder);
   private roomService = inject(RoomService);
+  private notificationService = inject(NotificationService);
 
   // Initialize form with local validator to avoid import issues
   bookingForm = this.fb.group({
@@ -49,24 +51,17 @@ export class BookingModalComponent {
 
   onSubmit() {
     if (this.bookingForm.valid) {
-      // Use getRawValue to ensure all data is captured
       const formValues = this.bookingForm.getRawValue();
-      const bookingData = { 
-        roomId: this.room.id, 
-        ...formValues 
-      };
-
-      console.log('Initiating Reservation...', bookingData);
-
-      this.roomService.bookRoom(bookingData as any).subscribe({
+      this.roomService.bookRoom({ roomId: this.room.id, ...formValues } as any).subscribe({
         next: (success) => {
           if (success) {
+            // Trigger the new notification
+            this.notificationService.show(`UNIT ${this.room.name} RESERVATION CONFIRMED. SEE YOU THERE.`);
             this.onSuccess.emit();
           }
         },
-        error: (err) => {
-          console.error('Reservation Failed:', err);
-          alert('SYSTEM_ERROR: Could not complete booking.');
+        error: () => {
+          this.notificationService.show('CONNECTION INTERRUPTED. RESERVATION FAILED.', 'ERROR');
         }
       });
     }

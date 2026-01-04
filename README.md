@@ -2,14 +2,19 @@
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.0.4.
 
-## Getting Started
+## Live Deployment
+The website is hosted at:
+
+🚀 [Access Live Demo](https://nurazimroizan.github.io/booking-engine/)
+
+## Local Development
 
 ### Prerequisites
 
 * Node.js: v18.13.0 or higher
 * Angular CLI: v17.0.0 or higher
 
-### Local Installation
+### Installation
 
 1. Clone the Repository
 ```bash
