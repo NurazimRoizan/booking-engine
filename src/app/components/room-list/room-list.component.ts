@@ -19,6 +19,7 @@ export class RoomListComponent implements OnInit {
   rooms = signal<Room[]>([]);
   isLoading = signal(true);
   selectedRoom = signal<Room | null>(null);
+  isDarkMode = signal(true);
 
   // Filter Signals
   searchTerm = signal('');
@@ -31,23 +32,50 @@ export class RoomListComponent implements OnInit {
   filteredRooms = computed(() => {
     let list = this.rooms().filter(r => {
       const search = this.searchTerm().toLowerCase();
-      const matchSearch = r.name.toLowerCase().includes(search) || 
-                          r.type.toLowerCase().includes(search);
+      const matchSearch = r.name.toLowerCase().includes(search) ||
+        r.type.toLowerCase().includes(search);
       const matchPrice = r.price <= this.maxPriceFilter();
       const matchType = this.typeFilter() === 'All' || r.type === this.typeFilter();
       const matchAvail = !this.onlyAvailable() || r.isAvailable;
-      
+
       return matchSearch && matchPrice && matchType && matchAvail;
     });
 
     if (this.sortOrder() === 'asc') list.sort((a, b) => a.price - b.price);
     if (this.sortOrder() === 'desc') list.sort((a, b) => b.price - a.price);
-    
+
     return list;
   });
 
   ngOnInit() {
+    this.initializeTheme();
     this.load();
+  }
+
+  initializeTheme() {
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'light') {
+      this.isDarkMode.set(false);
+      document.body.setAttribute('data-theme', 'light');
+    } else {
+      this.isDarkMode.set(true);
+      document.body.removeAttribute('data-theme');
+    }
+  }
+
+  toggleTheme() {
+    const newTheme = !this.isDarkMode();
+    this.isDarkMode.set(newTheme);
+
+    if (newTheme) {
+      // Dark mode
+      document.body.removeAttribute('data-theme');
+      localStorage.setItem('theme', 'dark');
+    } else {
+      // Light mode
+      document.body.setAttribute('data-theme', 'light');
+      localStorage.setItem('theme', 'light');
+    }
   }
 
   load() {

@@ -5,59 +5,153 @@
   --dark-grey: #0a0a0a;
 }
 
+/* Dark Mode (Default) */
 body {
-  background-color: var(--void-black);
-  color: #ffffff;
-  font-family: 'Orbitron', 'Segoe UI', sans-serif; /* Orbitron gives a tech feel */
+  --primary-color: #00f3ff;
+  --primary-glow: rgba(0, 243, 255, 0.4);
+  --bg-primary: #000000;
+  --bg-secondary: #0a0a0a;
+  --text-primary: #ffffff;
+  --text-secondary: #6c757d;
+  --border-color: rgba(0, 243, 255, 0.2);
+  --border-color-hover: #00f3ff;
+
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: 'Orbitron', 'Segoe UI', sans-serif;
   margin: 0;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Light Mode */
+body[data-theme="light"] {
+  --primary-color: #FF8C00;
+  --primary-glow: rgba(255, 140, 0, 0.4);
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8f9fa;
+  --text-primary: #212529;
+  --text-secondary: #6c757d;
+  --border-color: rgba(255, 140, 0, 0.2);
+  --border-color-hover: #FF8C00;
+}
+
+/* Bootstrap Override for Theme Support */
+.text-info {
+  color: var(--primary-color) !important;
+}
+
+.border-info {
+  border-color: var(--border-color-hover) !important;
+}
+
+.bg-black {
+  background-color: var(--bg-primary) !important;
+}
+
+.text-white {
+  color: var(--text-primary) !important;
+}
+
+.border-secondary {
+  border-color: var(--text-secondary) !important;
+}
+
+.btn-info {
+  background-color: var(--primary-color) !important;
+  border-color: var(--primary-color) !important;
+  color: var(--bg-primary) !important;
+}
+
+.btn-info:hover {
+  background-color: var(--border-color-hover) !important;
+  box-shadow: 0 0 15px var(--primary-glow) !important;
+}
+
+.btn-outline-secondary {
+  color: var(--text-secondary) !important;
+  border-color: var(--text-secondary) !important;
+}
+
+.btn-outline-secondary:hover {
+  background-color: var(--text-secondary) !important;
+  color: var(--bg-primary) !important;
+}
+
+.border-info {
+  border-color: var(--primary-color) !important;
 }
 
 /* Cyber Card Styling */
 .cyber-card {
-  background-color: var(--void-black);
-  border: 1px solid rgba(0, 243, 255, 0.2);
-  border-radius: 0; /* Sharp edges look more high-end tech */
+  background-color: var(--bg-primary);
+  border: 5px solid var(--border-color);
+  border-radius: 0;
+  /* Sharp edges look more high-end tech */
   position: relative;
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  color: var(--neon-cyan);
+  color: var(--primary-color);
 }
 
 .cyber-card:hover {
-  border-color: var(--neon-cyan);
-  box-shadow: 0 0 20px var(--neon-glow), inset 0 0 10px var(--neon-glow);
+  border-color: var(--border-color-hover);
+  box-shadow: 0 0 20px var(--primary-glow), inset 0 0 10px var(--primary-glow);
   transform: scale(1.02);
 }
 
 /* Typography Glow */
 .text-glow {
-  text-shadow: 0 0 8px var(--neon-glow);
+  text-shadow: 0 0 8px var(--primary-glow);
 }
 
-/* Custom Scrollbar for Cyber Look */
+/* Custom Scrollbar*/
 ::-webkit-scrollbar {
   width: 5px;
 }
+
 ::-webkit-scrollbar-track {
-  background: var(--void-black);
+  background: var(--bg-primary);
 }
+
 ::-webkit-scrollbar-thumb {
-  background: var(--neon-cyan);
-  box-shadow: 0 0 10px var(--neon-cyan);
+  background: var(--primary-color);
+  box-shadow: 0 0 10px var(--primary-color);
 }
 
 /* src/styles.css */
 @keyframes flicker {
-  0% { opacity: 0.97; }
-  5% { opacity: 0.9; }
-  10% { opacity: 0.98; }
-  15% { opacity: 0.85; }
-  20% { opacity: 0.99; }
-  100% { opacity: 1; }
+  0% {
+    opacity: 0.97;
+  }
+
+  5% {
+    opacity: 0.9;
+  }
+
+  10% {
+    opacity: 0.98;
+  }
+
+  15% {
+    opacity: 0.85;
+  }
+
+  20% {
+    opacity: 0.99;
+  }
+
+  100% {
+    opacity: 1;
+  }
 }
 
 @keyframes scanline {
-  0% { transform: translateY(-100%); }
-  100% { transform: translateY(100%); }
+  0% {
+    transform: translateY(-100%);
+  }
+
+  100% {
+    transform: translateY(100%);
+  }
 }
 
 .crt-flicker {
@@ -65,50 +159,54 @@ body {
 }
 
 .skeleton-box {
-  background: linear-gradient(90deg, #0a0a0a 25%, #1a1a1a 50%, #0a0a0a 75%);
+  background: linear-gradient(90deg, var(--bg-secondary) 25%, var(--bg-primary) 50%, var(--bg-secondary) 75%);
   background-size: 200% 100%;
   animation: skeleton-loading 1.5s infinite;
   height: 20px;
-  border: 1px solid rgba(0, 243, 255, 0.1);
+  border: 1px solid var(--border-color);
 }
 
 @keyframes skeleton-loading {
-  0% { background-position: 200% 0; }
-  100% { background-position: -200% 0; }
+  0% {
+    background-position: 200% 0;
+  }
+
+  100% {
+    background-position: -200% 0;
+  }
 }
 
 .scanline-overlay {
   position: absolute;
-  top: 0; left: 0; width: 100%; height: 100%;
-  background: linear-gradient(to bottom, transparent 50%, rgba(0, 243, 255, 0.05) 50%);
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, transparent 50%, var(--border-color) 50%);
   background-size: 100% 4px;
   pointer-events: none;
   z-index: 2;
 }
 
-/* Add this to src/styles.css to fix invisible calendar icons */
-
 /* Changes the calendar icon color to white/cyan for Chrome/Safari/Edge */
 input[type="date"]::-webkit-calendar-picker-indicator {
-    filter: invert(1) sepia(100%) saturate(500%) hue-rotate(170deg); /* Makes icon Cyan */
-    cursor: pointer;
-    opacity: 0.8;
-    background-color: white;
+  filter: invert(1) sepia(100%) saturate(500%) hue-rotate(170deg);
+  cursor: pointer;
+  opacity: 0.8;
+  background-color: white;
 }
 
 input[type="date"]::-webkit-calendar-picker-indicator:hover {
-    opacity: 1;
-    filter: invert(1) sepia(100%) saturate(1000%) hue-rotate(180deg);
+  opacity: 1;
+  filter: invert(1) sepia(100%) saturate(1000%) hue-rotate(180deg);
 }
 
 /* Ensure the input isn't being blocked by the scanline animation */
 input[type="date"] {
-    position: relative;
-    z-index: 5;
-    color-scheme:var(--neon-glow); /* Tells the browser to use a dark-themed calendar popup */
+  position: relative;
+  z-index: 5;
+  color-scheme: var(--neon-glow);
 }
-
-/* src/styles.css */
 
 /* 1. Base Range Input Styling */
 input[type="range"].form-range {
@@ -122,57 +220,84 @@ input[type="range"].form-range::-webkit-slider-thumb {
   appearance: none;
   height: 20px;
   width: 10px;
-  background: var(--neon-cyan); /* Using your cyan variable */
+  background: var(--primary-color);
   border: none;
-  box-shadow: 0 0 10px var(--neon-glow); /* Glowing effect */
-  border-radius: 0; /* Square for high-end tech look */
-  margin-top: -8px; /* Centers thumb on track */
+  box-shadow: 0 0 10px var(--primary-glow);
+  border-radius: 0;
+  margin-top: -8px;
 }
 
 /* 3. Style the Track (The Line) - Chrome, Edge, Safari */
 input[type="range"].form-range::-webkit-slider-runnable-track {
   width: 100%;
   height: 4px;
-  background: rgba(0, 243, 255, 0.1);
-  border: 1px solid rgba(0, 243, 255, 0.3);
+  background: var(--border-color);
+  border: 1px solid var(--border-color-hover);
 }
 
 /* 4. Firefox Support */
 input[type="range"].form-range::-moz-range-thumb {
   height: 20px;
   width: 10px;
-  background: var(--neon-cyan);
+  background: var(--primary-color);
   border: none;
-  box-shadow: 0 0 10px var(--neon-glow);
+  box-shadow: 0 0 10px var(--primary-glow);
   border-radius: 0;
 }
 
 input[type="range"].form-range::-moz-range-track {
   height: 4px;
-  background: rgba(0, 243, 255, 0.1);
-  border: 1px solid rgba(0, 243, 255, 0.3);
+  background: var(--border-color);
+  border: 1px solid var(--border-color-hover);
 }
 
-/* 5. Hover state for extra glow */
 input[type="range"].form-range:active::-webkit-slider-thumb {
-  box-shadow: 0 0 15px var(--neon-cyan);
+  box-shadow: 0 0 15px var(--primary-color);
   transform: scaleY(1.2);
 }
 
 .form-check-input {
   background-color: transparent !important;
-  border: 1px solid rgba(0, 243, 255, 0.3) !important;
+  border: 1px solid var(--border-color-hover) !important;
   cursor: pointer;
   transition: all 0.3s ease;
 }
 
 .form-check-input:checked {
-  background-color: var(--neon-cyan) !important; /* Turns cyan when active */
-  border-color: var(--neon-cyan) !important;
-  color-scheme:var(--neon-glow);
-  box-shadow: 0 0 10px var(--neon-glow) !important;
+  background-color: var(--primary-color) !important;
+  border-color: var(--primary-color) !important;
+  color-scheme: var(--primary-glow);
+  box-shadow: 0 0 10px var(--primary-glow) !important;
 }
 
 .form-check-input:active {
-  box-shadow: 0 0 15px var(--neon-cyan) !important;
+  box-shadow: 0 0 15px var(--primary-color) !important;
+}
+
+/* Light mode specific adjustments */
+body[data-theme="light"] .form-control {
+  background-color: var(--bg-secondary) !important;
+  color: var(--text-primary) !important;
+  border-color: var(--text-secondary) !important;
+}
+
+body[data-theme="light"] .form-control:focus {
+  background-color: var(--bg-primary) !important;
+  border-color: var(--primary-color) !important;
+  box-shadow: 0 0 0 0.2rem var(--border-color) !important;
+}
+
+body[data-theme="light"] .form-select {
+  background-color: var(--bg-secondary) !important;
+  color: var(--text-primary) !important;
+  border-color: var(--text-secondary) !important;
+}
+
+body[data-theme="light"] .form-select:focus {
+  border-color: var(--primary-color) !important;
+  box-shadow: 0 0 0 0.2rem var(--border-color) !important;
+}
+
+body[data-theme="light"] .btn-close {
+  filter: invert(1);
 }
